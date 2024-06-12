@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include "Hand.h"
 using namespace std;
-using namespace myCard;
 using namespace myHand;
 
 namespace myDeck
@@ -14,17 +13,20 @@ namespace myDeck
         public:
             Deck()
             {
-                Card card1;
-                int index = 0;
+                Card card1 = Card();
                 for (string mySuit : card1.suits)
                 {
                     for (string myName : card1.names)
                     {
-                        Card card2(mySuit,myName);
-                        this->cards[index] = card2;
-                        index += 1;
+                        Card card2 = Card(mySuit,myName);
+                        this->cards.emplace_back(card2);
                     }
                 }
+            }
+
+            vector<Card> getCards()
+            {
+                return this->cards;
             }
 
             void returnAllCards(vector<Hand> playerHands)
@@ -55,15 +57,19 @@ namespace myDeck
 
             void shuffle()
             {
+                cout << "Shuffle" <<endl;
                 vector<Card> newDeck;
                 while (this->cards.size() > 0)
                 {
-                    int myInt = rand() % 1 + this->cards.size();
-                    Card givenCard = this->cards.back();
+                    int myInt = rand() % this->cards.size();
+                    Card givenCard = this->cards[myInt];
+                    Card lastCard = this->cards.back();
+                    this->cards[myInt] = lastCard;
                     this->cards.pop_back();
                     newDeck.emplace_back(givenCard);
                 }
                 this->cards = newDeck;
+                cout << this->getCards().back().getName() << endl;
             }
 
     };

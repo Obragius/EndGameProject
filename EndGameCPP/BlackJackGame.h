@@ -7,13 +7,13 @@ namespace myBlackJackGame
     {
         public:
             BlackJackGame()
-            : Game()
             {
                 for (int i = 0; i < 2 ; i++)
                 {
                     this->addPlayer();
                 }
                 this->getGameDeck().shuffle();
+                cout << this->getGameDeck().getCards().back().getName() << endl;
             }
 
             void startGame()

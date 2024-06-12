@@ -6,7 +6,7 @@ namespace myGame
 {
     class Game
     {
-        private:
+        protected:
             bool gameOn;
             Deck gameDeck;
             vector<bool> lost;
@@ -17,11 +17,12 @@ namespace myGame
             Game()
             {
                 this->gameOn = true;
-                Deck givenDeck;
-                this->gameDeck = givenDeck;
+                Deck givenDeck = Deck();
+                Deck pGivenDeck = givenDeck;
+                this->gameDeck = pGivenDeck;
             }
 
-            Deck getGameDeck()
+            Deck& getGameDeck()
             {
                 return this->gameDeck;
             }

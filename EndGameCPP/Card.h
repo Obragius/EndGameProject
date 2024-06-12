@@ -48,7 +48,15 @@ namespace myCard
             int getValue()
             {
                 // Switch statements cannot use strings so a workaround
-                int index = Card::names->find(this->name); // Find the index of the card
+                int index;
+                for (int i = 0; i < 13; i++)
+                {
+                    if (this->getName() == this->names[i])
+                    {
+                        index = i;
+                    }
+                }
+
                 if (index < 9)
                 {
                     return index + 2;
