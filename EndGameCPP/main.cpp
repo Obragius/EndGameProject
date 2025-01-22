@@ -6,7 +6,6 @@ using namespace myBlackJackGame;
 
 int main ()
 {
-    cout << "Started" << endl;
     BlackJackGame thisGame;
     cout << "Hello and welcome to BlackJack" << endl;
     cout << "To play twist to recieve more cards or stick to stop" << endl;

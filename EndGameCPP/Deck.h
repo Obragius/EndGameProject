@@ -1,6 +1,7 @@
 #include <vector>
 #include <stdlib.h>
 #include "Hand.h"
+#include <random>
 using namespace std;
 using namespace myCard;
 using namespace myHand;
@@ -9,22 +10,25 @@ namespace myDeck
 {
     class Deck
     {
-        private:
+        protected:
             vector<Card> cards;
         public:
             Deck()
             {
                 Card card1;
-                int index = 0;
                 for (string mySuit : card1.suits)
                 {
                     for (string myName : card1.names)
                     {
                         Card card2(mySuit,myName);
-                        this->cards[index] = card2;
-                        index += 1;
+                        this->cards.push_back(card2);
                     }
                 }
+            }
+
+            int getSize()
+            {
+                return cards.size();
             }
 
             void returnAllCards(vector<Hand> playerHands)
@@ -56,14 +60,28 @@ namespace myDeck
             void shuffle()
             {
                 vector<Card> newDeck;
-                while (this->cards.size() > 0)
+
+                //From Chat GPT------
+                // Create a random device to seed the random number generator
+                random_device rd;
+
+                // Use Mersenne Twister as the random number generator
+                mt19937 gen(rd());
+                //-------------------
+
+                for (int i = 0; i < 4; i++)
                 {
-                    int myInt = rand() % 1 + this->cards.size();
-                    Card givenCard = this->cards.back();
-                    this->cards.pop_back();
-                    newDeck.emplace_back(givenCard);
+                    while (this->cards.size() > 0)
+                    {
+                        std::uniform_int_distribution<> distrib(0, this->cards.size()-1);
+                        int myInt = distrib(gen);
+
+                        Card givenCard = this->cards[myInt];
+                        this->cards.erase(this->cards.begin() + myInt);
+                        newDeck.push_back(givenCard);
+                    }
+                    this->cards = newDeck;
                 }
-                this->cards = newDeck;
             }
 
     };

@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <algorithm>
 using namespace std;
 namespace myCard
 {
@@ -9,14 +11,13 @@ namespace myCard
             string name;
         public:
             // Moved the names to public attrbiutes to use in the deck class
-            string names[13] = {"Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King","Ace"}; // Create an array of all names 
-            string suits[4] = {"Hearts","Diamonds","Spades","Clubs"};
+            vector<string> names = {"Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten","Jack","Queen","King","Ace"}; // Create an array of all names 
+            vector<string> suits = {"Hearts","Diamonds","Spades","Clubs"};
 
 
 
             Card()
             {
-
             }
 
             Card(string suit, string name)
@@ -48,7 +49,9 @@ namespace myCard
             int getValue()
             {
                 // Switch statements cannot use strings so a workaround
-                int index = Card::names->find(this->name); // Find the index of the card
+                auto it = find(this->names.begin(),this->names.end(), this->name); // Find the index of the card
+                int index = distance(this->names.begin(),it);
+
                 if (index < 9)
                 {
                     return index + 2;

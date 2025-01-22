@@ -21,7 +21,7 @@ namespace myGame
                 this->gameDeck = givenDeck;
             }
 
-            Deck getGameDeck()
+            Deck& getGameDeck()
             {
                 return this->gameDeck;
             }

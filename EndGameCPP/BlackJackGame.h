@@ -1,5 +1,6 @@
 #include "Game.h"
 using namespace myGame;
+using namespace std;
 
 namespace myBlackJackGame
 {
@@ -7,14 +8,14 @@ namespace myBlackJackGame
     {
         public:
             BlackJackGame()
-            : Game()
-            {
-                for (int i = 0; i < 2 ; i++)
+                : Game()
                 {
-                    this->addPlayer();
+                    for (int i = 0; i < 2 ; i++)
+                    {
+                        this->addPlayer();
+                    }
+                    this->getGameDeck().shuffle();
                 }
-                this->getGameDeck().shuffle();
-            }
 
             void startGame()
             {
